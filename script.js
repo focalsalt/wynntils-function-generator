@@ -12,6 +12,15 @@ const COMPONENT_SUGGESTIONS = {
   "mte": "比較數值是否大於等於某數",
 };
 
+const COMPONENT_ARG_COUNTS = {
+  string: 1,
+  ping: 0,
+  str: 1,
+  int: 1,
+  if_str: 3,
+  mte: 2,
+};
+
 function genId() {
   return `node_${counter++}`;
 }
@@ -41,13 +50,13 @@ function findParent(id, list = tree) {
 
 function createAutoSuggestInput(value, onInput, tooltip = '') {
   const wrapper = document.createElement("div");
-  wrapper.className = "relative w-full";
+  wrapper.className = "relative w-full flex";
 
   const input = document.createElement("input");
   input.type = "text";
   input.value = value;
   input.placeholder = "組件名稱";
-  input.className = "w-full border p-1";
+  input.className = "border p-1 mr-2 text-black";
   input.title = tooltip;
 
   const datalist = document.createElement("ul");
@@ -82,18 +91,22 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
 
 function createTextForm(node) {
   const li = document.createElement("li");
-  li.className = "p-4 bg-[#2d3340] rounded-xl shadow flex flex-col gap-2";
+  li.className = "flex items-center gap-2 py-1";
   li.draggable = true;
   li.dataset.id = node.id;
 
   const input = document.createElement("input");
   input.type = "text";
   input.placeholder = "輸入文字";
-  input.className = "flex-1 border p-1 mr-2";
+  input.className = "flex-grow border p-1 mr-2 text-black";
   input.value = node.value;
+  input.addEventListener('mousedown', e => e.stopPropagation());
+  input.addEventListener('touchstart', e => e.stopPropagation());
   input.addEventListener('input', () => {
     node.value = input.value;
-    document.getElementById('preview').textContent = tree.map(n => renderNode(n)).join('');
+  });
+  input.addEventListener('blur', () => {
+    renderAll();
   });
 
   const del = document.createElement("button");
@@ -116,28 +129,34 @@ function createTextForm(node) {
   };
 
   addDragHandlers(li);
-  li.append(input, del, dup);
+  li.append(dup, del, input);
   return li;
 }
 
 function createCompForm(node) {
   const li = document.createElement("li");
-  li.className = "p-4 bg-[#2d3340] rounded-xl shadow flex flex-col gap-2";
+  li.className = "flex flex-col gap-1 py-1 flex-grow";
+
   li.draggable = true;
   li.dataset.id = node.id;
 
   const tip = COMPONENT_SUGGESTIONS[node.name] || "";
   const nameField = createAutoSuggestInput(node.name, (val, isSelect) => {
     node.name = val;
+    if (val !== "concat") {
+      const count = COMPONENT_ARG_COUNTS[val] ?? node.args.length;
+      while (node.args.length < count) {
+        node.args.push({ id: genId(), type: "text", value: "" });
+      }
+      while (node.args.length > count) {
+        node.args.pop();
+      }
+    }
     if (isSelect) renderAll();
   }, tip);
 
-  const argList = document.createElement("ul");
-  argList.className = "ml-4 space-y-1";
-  node.args.forEach(child => {
-    const form = child.type === "text" ? createTextForm(child) : createCompForm(child);
-    argList.appendChild(form);
-  });
+  const mainRow = document.createElement("div");
+  mainRow.className = "flex items-center gap-2";
 
   const btnTxt = document.createElement("button");
   btnTxt.textContent = "＋文字參數";
@@ -174,8 +193,22 @@ function createCompForm(node) {
     renderAll();
   };
 
+  mainRow.append(dup, del);
+  mainRow.append(nameField);
+  if (node.name === "concat") {
+  mainRow.append(btnTxt, btnComp);
+  }
+
+  // 子節點列表
+  const argList = document.createElement("ul");
+  argList.className = "ml-6 space-y-1"; // 縮排顯示
+  node.args.forEach(child => {
+    const form = child.type === "text" ? createTextForm(child) : createCompForm(child);
+    argList.appendChild(form);
+  });
+
   addDragHandlers(li);
-  li.append(nameField, argList, btnTxt, btnComp, del, dup);
+  li.append(mainRow, argList);
   return li;
 }
 
@@ -223,9 +256,17 @@ function addCompNode() {
 }
 
 function renderNode(node, isRoot = true) {
-  if (node.type === 'text') return `"${node.value.replace(/"/g, '\\"')}"`;
+  if (node.type === 'text') return isRoot ? node.value : `"${node.value.replace(/"/g, '\\"')}"`;
   const inner = node.args.map(arg => renderNode(arg, false)).join('; ');
-  return isRoot ? `{${node.name}(${inner})}` : `${node.name}(${inner})`;
+  if (isRoot) {
+    return node.args.length > 0
+      ? `{${node.name}(${inner})}`
+      : `{${node.name}}`;
+  } else {
+    return node.args.length > 0
+      ? `${node.name}(${inner})`
+      : `${node.name}`;
+  }
 }
 
 function renderAll() {
