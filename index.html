@@ -8,21 +8,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    input { background-color: #FFFFFF20; border-radius: 0.5rem; padding: 1px; }
     body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
 <body class="flex h-screen bg-[#181c23] text-white">
   <aside class="w-2/4 bg-[#23272f] p-6 overflow-auto border-r border-[#2d3340] space-y-6 shadow-lg rounded-r-3xl">
-    <h2 class="text-2xl font-semibold mb-2">新增節點</h2>
+    <h2 class="text-2xl font-semibold mb-2">Add Node</h2>
     <div class="space-x-3">
-      <button id="addText" class="px-4 py-2 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition">文字節點</button>
-      <button id="addComp" class="px-4 py-2 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition">組件節點</button>
+      <button id="addText" class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition-all">Text</button>
+      <button id="addComp" class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition-all">Component</button>
     </div>
-    <h2 class="text-2xl font-semibold mt-8 mb-2">節點列表</h2>
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Node List</h2>
     <ul id="nodeList" class="space-y-4"></ul>
   </aside>
   <main class="flex-1 p-10 flex flex-col bg-[#181c23]">
-    <h1 class="text-3xl font-bold mb-6">Wynntils Function 預覽</h1>
+    <h1 class="text-3xl font-bold mb-6">Wynntils Function Preview</h1>
     <pre id="preview" class="flex-1 p-6 bg-[#23272f] text-green-400 font-mono overflow-auto rounded-xl shadow-inner"></pre>
   </main>
   <script type="module" src="script.js"></script>
