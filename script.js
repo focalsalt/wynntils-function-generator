@@ -55,7 +55,7 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
 
   input.oninput = (e) => {
     const val = e.target.value;
-    onInput(val);
+    onInput(val, false);
     datalist.innerHTML = "";
     if (val.length === 0) return datalist.classList.add("hidden");
     const hits = Object.keys(COMPONENT_SUGGESTIONS).filter(s => s.startsWith(val));
@@ -63,11 +63,11 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
     hits.forEach(s => {
       const li = document.createElement("li");
       li.textContent = s;
-      li.className = "cursor-pointer px-2 py-1";
+      li.className = "p-4 bg-[#2d3340] rounded-xl shadow flex flex-col gap-2";
       li.onclick = () => {
         input.value = s;
         input.title = COMPONENT_SUGGESTIONS[s] || "";
-        onInput(s);
+        onInput(s, true);
         datalist.classList.add("hidden");
       };
       datalist.appendChild(li);
@@ -82,7 +82,7 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
 
 function createTextForm(node) {
   const li = document.createElement("li");
-  li.className = "p-2 bg-white rounded flex justify-between items-center";
+  li.className = "p-4 bg-[#2d3340] rounded-xl shadow flex flex-col gap-2";
   li.draggable = true;
   li.dataset.id = node.id;
 
@@ -98,7 +98,7 @@ function createTextForm(node) {
 
   const del = document.createElement("button");
   del.textContent = "刪除";
-  del.className = "text-red-500";
+  del.className = "px-3 py-1 bg-[#f74040] hover:bg-[#dc2626] text-white rounded-xl shadow transition";
   del.onclick = () => {
     const p = findParent(node.id);
     p.list.splice(p.index, 1);
@@ -107,7 +107,7 @@ function createTextForm(node) {
 
   const dup = document.createElement("button");
   dup.textContent = "複製";
-  dup.className = "text-blue-500 ml-2";
+  dup.className = "px-3 py-1 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition";
   dup.onclick = () => {
     const p = findParent(node.id);
     const copy = cloneNode(node);
@@ -122,14 +122,14 @@ function createTextForm(node) {
 
 function createCompForm(node) {
   const li = document.createElement("li");
-  li.className = "p-2 bg-white rounded space-y-2";
+  li.className = "p-4 bg-[#2d3340] rounded-xl shadow flex flex-col gap-2";
   li.draggable = true;
   li.dataset.id = node.id;
 
   const tip = COMPONENT_SUGGESTIONS[node.name] || "";
-  const nameField = createAutoSuggestInput(node.name, val => {
+  const nameField = createAutoSuggestInput(node.name, (val, isSelect) => {
     node.name = val;
-    renderAll();
+    if (isSelect) renderAll();
   }, tip);
 
   const argList = document.createElement("ul");
@@ -141,7 +141,7 @@ function createCompForm(node) {
 
   const btnTxt = document.createElement("button");
   btnTxt.textContent = "＋文字參數";
-  btnTxt.className = "px-2 py-1 bg-blue-200 rounded mr-2";
+  btnTxt.className = "px-3 py-1 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition";
   btnTxt.onclick = () => {
     node.args.push({ id: genId(), type: "text", value: "" });
     renderAll();
@@ -149,7 +149,7 @@ function createCompForm(node) {
 
   const btnComp = document.createElement("button");
   btnComp.textContent = "＋子組件";
-  btnComp.className = "px-2 py-1 bg-green-200 rounded";
+  btnComp.className = "px-3 py-1 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition";
   btnComp.onclick = () => {
     node.args.push({ id: genId(), type: "component", name: "", args: [] });
     renderAll();
@@ -157,7 +157,7 @@ function createCompForm(node) {
 
   const del = document.createElement("button");
   del.textContent = "刪除";
-  del.className = "text-red-500";
+  del.className = "px-3 py-1 bg-[#f74040] hover:bg-[#dc2626] text-white rounded-xl shadow transition";
   del.onclick = () => {
     const p = findParent(node.id);
     p.list.splice(p.index, 1);
@@ -166,7 +166,7 @@ function createCompForm(node) {
 
   const dup = document.createElement("button");
   dup.textContent = "複製";
-  dup.className = "text-blue-500 ml-2";
+  dup.className = "px-3 py-1 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition";
   dup.onclick = () => {
     const p = findParent(node.id);
     const copy = cloneNode(node);
