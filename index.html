@@ -1,6 +1,7 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,38 +9,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    li.drop-before { border-top: 2px solid #43b581 !important; }
-    li.drop-after { border-bottom: 2px solid #43b581 !important; }
-    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-    .animate-fade-in { animation: fade-in 0.2s; }
-    @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
-    .animate-fade-out { animation: fade-out 0.3s; }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    li.drop-before {
+      border-top: 2px solid #43b581 !important;
+    }
+
+    li.drop-after {
+      border-bottom: 2px solid #43b581 !important;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.2s;
+    }
+
+    @keyframes fade-out {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+
+    .animate-fade-out {
+      animation: fade-out 0.3s;
+    }
   </style>
 </head>
-<body class="flex h-screen bg-[#181c23] text-white">
-  <main class="w-full bg-[#23272f] p-6 overflow-y-auto border-r border-[#2d3340] space-y-6 shadow-lg rounded-r-3xl">
+
+<body class="flex h-screen bg-[#181c23] text-white relative max-md:text-sm">
+  <main
+    class="bg-[#23272f] p-6 overflow-y-auto border-r border-[#2d3340] space-y-6 shadow-lg rounded-r-3xl flex flex-grow flex-col">
     <h2 class="text-2xl font-semibold mb-2">Add Node</h2>
     <div class="space-x-3">
-      <button id="addText" class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition-all">Text</button>
-      <button id="addComp" class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition-all">Function</button>
+      <button id="addText"
+        class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition-all">Text</button>
+      <button id="addComp"
+        class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition-all">Function</button>
     </div>
     <h2 class="text-2xl font-semibold mt-8 mb-2">Node List</h2>
-    <ul id="nodeList" class=""></ul>
+    <ul id="nodeList" class="overflow-auto flex-grow"></ul>
   </main>
   <div id="preview-float"
-      class="fixed bottom-4 right-0 z-50 bg-[#181c23] text-green-400 font-mono rounded-l-xl shadow-lg transition-transform duration-300"
-      style="width: 800px; max-width: 90vw; transform: translateX(0);">
+    class="fixed bottom-4 right-0 z-50 bg-[#181c23] text-green-400 font-mono rounded-l-xl shadow-lg transition-transform duration-300"
+    style="width: 800px; max-width: 90vw; transform: translateX(0);">
     <div id="preview-toggle"
-        class="absolute left-[-40px] top-6 w-10 h-10 bg-[#181c23] rounded-l-xl flex items-center justify-center cursor-pointer shadow-lg border border-[#2d3340]">
+      class="absolute left-[-40px] top-6 w-10 h-10 bg-[#181c23] rounded-l-xl flex items-center justify-center cursor-pointer shadow-lg border border-[#2d3340]">
       <span id="preview-arrow" class="text-2xl select-none">&#8594;</span>
     </div>
     <div class="p-4 border-b border-[#2d3340] font-bold text-lg flex items-center justify-between">
       <span>Result</span>
-      <button id="copy-preview" class="ml-2 px-3 py-1 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition text-base">Copy</button>
+      <button id="copy-preview"
+        class="ml-2 px-3 py-1 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition text-base">Copy</button>
     </div>
-    <pre id="preview" class="p-4 overflow-auto" style="min-height: 50vh; max-height: 50vh; white-space: pre-wrap;"></pre>
+    <pre id="preview" class="p-4 overflow-auto"
+      style="min-height: 50vh; max-height: 50vh; white-space: pre-wrap;"></pre>
   </div>
   <script type="module" src="script.js"></script>
 </body>
+
 </html>
