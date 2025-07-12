@@ -69,13 +69,13 @@ function findParent(id, list = tree) {
 
 function createAutoSuggestInput(value, onInput, tooltip = '') {
   const wrapper = document.createElement("div");
-  wrapper.className = "relative flex flex-grow min-w-0";
+  wrapper.className = "relative flex flex-1 max-w-[420px]"; // flex-1
 
   const input = document.createElement("input");
   input.type = "text";
   input.value = value;
   input.placeholder = "組件名稱";
-  input.className = "w-1/3 min-w-0 flex-shrink border rounded-xl bg-[#23272f] text-white px-3 py-1 shadow mr-2 focus:outline-none focus:ring-2 focus:ring-[#5865f2] transition";
+  input.className = "w-full border rounded-xl bg-[#23272f] text-white px-3 py-1 shadow focus:outline-none focus:ring-2 focus:ring-[#5865f2] transition";
   input.title = tooltip;
 
   const datalist = document.createElement("ul");
@@ -128,10 +128,14 @@ function createTextForm(node) {
   dragHandle.dataset.id = node.id;
   addDragHandlers(dragHandle);
 
+  // 新增 input 外層
+  const inputWrapper = document.createElement("div");
+  inputWrapper.className = "flex-1 max-w-[420px]";
+
   const input = document.createElement("input");
   input.type = "text";
   input.placeholder = "輸入文字";
-  input.className = "w-1/3 min-w-0 flex-shrink border rounded-xl bg-[#23272f] text-white px-3 py-1 shadow mr-2 focus:outline-none focus:ring-2 focus:ring-[#5865f2] transition";
+  input.className = "w-full border rounded-xl bg-[#23272f] text-white px-3 py-1 shadow focus:outline-none focus:ring-2 focus:ring-[#5865f2] transition";
   input.value = node.value;
   input.addEventListener('mousedown', e => e.stopPropagation());
   input.addEventListener('touchstart', e => e.stopPropagation());
@@ -141,6 +145,7 @@ function createTextForm(node) {
   input.addEventListener('blur', () => {
     renderAll();
   });
+  inputWrapper.appendChild(input);
 
   const del = document.createElement("button");
   del.textContent = "刪除";
@@ -161,13 +166,13 @@ function createTextForm(node) {
     renderAll();
   };
 
-  row.append(dragHandle, dup, del, input);
+  row.append(dragHandle, dup, del, inputWrapper);
   return row;
 }
 
 function createCompForm(node) {
   const box = document.createElement("div");
-  box.className = "flex flex-col gap-1 py-1 flex-grow w-full";
+  box.className = "flex flex-col gap-1 py-1 flex-grow w-full min-w-0";
   box.dataset.id = node.id;
 
   // 主行
@@ -396,7 +401,12 @@ function renderNode(node, isRoot = true, parentComp = null, argIdx = null) {
 function renderAll() {
   const ul = document.getElementById('nodeList');
   ul.innerHTML = '';
-  tree.forEach(node => ul.appendChild(node.type === 'text' ? createTextForm(node) : createCompForm(node)));
+  tree.forEach((node, i) => {
+    const elem = node.type === 'text' ? createTextForm(node) : createCompForm(node);
+    // 設定主節點背景色
+    elem.style.background = (i % 2 === 0) ? "#282d36" : "#20232a";
+    ul.appendChild(elem);
+  });
   document.getElementById('preview').textContent = tree.map(n => renderNode(n)).join('');
 }
 
@@ -404,6 +414,26 @@ window.onload = () => {
   document.getElementById('addText').onclick = addTextNode;
   document.getElementById('addComp').onclick = addCompNode;
   renderAll();
+
+  // 複製預覽內容並顯示提示
+  const copyBtn = document.getElementById('copy-preview');
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      const text = document.getElementById('preview').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        // 顯示提示
+        const tip = document.createElement('div');
+        tip.textContent = '已複製到剪貼簿！';
+        tip.className = 'fixed bottom-8 right-8 bg-[#43b581] text-white px-4 py-2 rounded-xl shadow-lg z-[9999] animate-fade-in';
+        document.body.appendChild(tip);
+        setTimeout(() => {
+          tip.classList.remove('animate-fade-in');
+          tip.classList.add('animate-fade-out');
+          setTimeout(() => tip.remove(), 300);
+        }, 1200);
+      });
+    };
+  }
 };
 
 (function() {
