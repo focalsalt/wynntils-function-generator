@@ -252,7 +252,7 @@ const COMPONENTS = {
     if_capped_value: {desc: "work in progress...", args: [], returns: "string"},
     if_custom_color: {desc: "work in progress...", args: [], returns: "string"},
     if_number: {desc: "work in progress...", args: [], returns: "string"},
-    if_string: { desc: "設定條件，顯示不同字串", args: [{ type: "boolean" }, { type: "string" }, { type: "string" }], returns: "string" },
+    if_string: { desc: "設定條件，顯示不同字串", args: [{ type: "boolean" }, { type: ["if true", "component"] }, { type: ["if false", "component"] }], returns: "string" },
     integer: {desc: "轉換成整數", args: [], returns: "number"},
     leading_zeros: {desc: "work in progress...", args: [], returns: "string"},
     less_than: {desc: "work in progress...", args: [], returns: "string"},
