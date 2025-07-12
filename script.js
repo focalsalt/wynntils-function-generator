@@ -2,42 +2,297 @@ let tree = [];
 let counter = 0;
 
 const COMPONENTS = {
-  concat: {
-    desc: "多個字串合併",
-    args: [{ type: "any[]" }],
-    returns: "string"
-  },
-  string: {
-    desc: "將整數轉換成字串",
-    args: [{ type: ["number", "component"] }],
-    returns: "string"
-  },
-  ping: {
-    desc: "取得延遲",
-    args: [],
-    returns: "number"
-  },
-  str: {
-    desc: "將整數轉換成字串",
-    args: [{ type: "string" }],
-    returns: "string"
-  },
-  int: {
-    desc: "整數",
-    args: [{ type: "number" }],
-    returns: "number"
-  },
-  if_str: {
-    desc: "字串條件",
-    args: [{ type: "string" }, { type: "string" }, { type: "string" }],
-    returns: "string"
-  },
-  mte: {
-    desc: "數學運算",
-    args: [{ type: "number" }, { type: "number" }],
-    returns: "number"
-  },
-  // ... 你可以繼續補齊其他組件 ...
+    accessory_durability: {desc: "work in progress...", args: [], returns: "string"},
+    all_shiny_stats: {desc: "work in progress...", args: [], returns: "string"},
+    annihilation_sun_progress: {desc: "work in progress...", args: [], returns: "string"},
+    area_damage_average: {desc: "work in progress...", args: [], returns: "string"},
+    area_damage_per_second: {desc: "work in progress...", args: [], returns: "string"},
+    armor_durability: {desc: "work in progress...", args: [], returns: "string"},
+    arrow_shield_count: {desc: "work in progress...", args: [], returns: "string"},
+    aura_timer: {desc: "work in progress...", args: [], returns: "string"},
+    blink_shader: {desc: "work in progress...", args: [], returns: "string"},
+    blocks_above_ground: {desc: "work in progress...", args: [], returns: "string"},
+    bps: {desc: "work in progress...", args: [], returns: "string"},
+    bps_xz: {desc: "work in progress...", args: [], returns: "string"},
+    capped_awakened_progress: {desc: "work in progress...", args: [], returns: "string"},
+    capped_blood_pool: {desc: "work in progress...", args: [], returns: "string"},
+    capped_corrupted: {desc: "work in progress...", args: [], returns: "string"},
+    capped_focus: {desc: "work in progress...", args: [], returns: "string"},
+    capped_guild_level_progress: {desc: "work in progress...", args: [], returns: "string"},
+    capped_guild_objectives_progress: {desc: "work in progress...", args: [], returns: "string"},
+    capped_health: {desc: "work in progress...", args: [], returns: "string"},
+    capped_held_item_durability: {desc: "work in progress...", args: [], returns: "string"},
+    capped_holy_power: {desc: "work in progress...", args: [], returns: "string"},
+    capped_horse_level: {desc: "work in progress...", args: [], returns: "string"},
+    capped_horse_total_level_time: {desc: "work in progress...", args: [], returns: "string"},
+    capped_horse_xp: {desc: "work in progress...", args: [], returns: "string"},
+    capped_ingredient_pouch_slots: {desc: "work in progress...", args: [], returns: "string"},
+    capped_inventory_slots: {desc: "work in progress...", args: [], returns: "string"},
+    capped_level: {desc: "work in progress...", args: [], returns: "string"},
+    capped_mana: {desc: "work in progress...", args: [], returns: "string"},
+    capped_mana_bank: {desc: "work in progress...", args: [], returns: "string"},
+    capped_mem: {desc: "work in progress...", args: [], returns: "string"},
+    capped_ophanim: {desc: "work in progress...", args: [], returns: "string"},
+    capped_xp: {desc: "work in progress...", args: [], returns: "string"},
+    chest_opened: {desc: "work in progress...", args: [], returns: "string"},
+    class: {desc: "work in progress...", args: [], returns: "string"},
+    clock: {desc: "work in progress...", args: [], returns: "string"},
+    clockm: {desc: "work in progress...", args: [], returns: "string"},
+    commander_activated: {desc: "work in progress...", args: [], returns: "string"},
+    commander_duration: {desc: "work in progress...", args: [], returns: "string"},
+    current_raid: {desc: "work in progress...", args: [], returns: "string"},
+    current_raid_boss_count: {desc: "work in progress...", args: [], returns: "string"},
+    current_raid_challenge_count: {desc: "work in progress...", args: [], returns: "string"},
+    current_raid_damage: {desc: "work in progress...", args: [], returns: "string"},
+    current_raid_room_damage: {desc: "work in progress...", args: [], returns: "string"},
+    current_raid_room_name: {desc: "work in progress...", args: [], returns: "string"},
+    current_raid_room_time: {desc: "work in progress...", args: [], returns: "string"},
+    current_raid_time: {desc: "work in progress...", args: [], returns: "string"},
+    current_territory: {desc: "work in progress...", args: [], returns: "string"},
+    current_territory_owner: {desc: "work in progress...", args: [], returns: "string"},
+    current_tower_attack_speed: {desc: "work in progress...", args: [], returns: "string"},
+    current_tower_damage: {desc: "work in progress...", args: [], returns: "string"},
+    current_tower_defense: {desc: "work in progress...", args: [], returns: "string"},
+    current_tower_health: {desc: "work in progress...", args: [], returns: "string"},
+    current_world: {desc: "work in progress...", args: [], returns: "string"},
+    dir: {desc: "work in progress...", args: [], returns: "string"},
+    dry_aspects: {desc: "work in progress...", args: [], returns: "string"},
+    dry_boxes: {desc: "work in progress...", args: [], returns: "string"},
+    dry_pulls: {desc: "work in progress...", args: [], returns: "string"},
+    dry_raid_reward_pulls: {desc: "work in progress...", args: [], returns: "string"},
+    dry_raids_aspects: {desc: "work in progress...", args: [], returns: "string"},
+    dry_raids_tomes: {desc: "work in progress...", args: [], returns: "string"},
+    dry_streak: {desc: "work in progress...", args: [], returns: "string"},
+    emerald_block: {desc: "work in progress...", args: [], returns: "string"},
+    emerald_string: {desc: "work in progress...", args: [], returns: "string"},
+    emeralds: {desc: "work in progress...", args: [], returns: "string"},
+    estimated_time_to_finish_war: {desc: "work in progress...", args: [], returns: "string"},
+    fade_shader: {desc: "work in progress...", args: [], returns: "string"},
+    focused_mob_health: {desc: "work in progress...", args: [], returns: "string"},
+    focused_mob_health_percent: {desc: "work in progress...", args: [], returns: "string"},
+    focused_mob_name: {desc: "work in progress...", args: [], returns: "string"},
+    fps: {desc: "work in progress...", args: [], returns: "string"},
+    friends: {desc: "work in progress...", args: [], returns: "string"},
+    gradient_shader: {desc: "work in progress...", args: [], returns: "string"},
+    guardian_angels_count: {desc: "work in progress...", args: [], returns: "string"},
+    guild_level: {desc: "work in progress...", args: [], returns: "string"},
+    guild_name: {desc: "work in progress...", args: [], returns: "string"},
+    guild_rank: {desc: "work in progress...", args: [], returns: "string"},
+    health: {desc: "work in progress...", args: [], returns: "string"},
+    health_max: {desc: "work in progress...", args: [], returns: "string"},
+    health_pct: {desc: "work in progress...", args: [], returns: "string"},
+    held_item_cooldown: {desc: "work in progress...", args: [], returns: "string"},
+    held_item_current_durability: {desc: "work in progress...", args: [], returns: "string"},
+    held_item_max_durability: {desc: "work in progress...", args: [], returns: "string"},
+    held_item_name: {desc: "work in progress...", args: [], returns: "string"},
+    held_item_shiny_stat: {desc: "work in progress...", args: [], returns: "string"},
+    held_item_type: {desc: "work in progress...", args: [], returns: "string"},
+    highest_dry_streak: {desc: "work in progress...", args: [], returns: "string"},
+    horse_level: {desc: "work in progress...", args: [], returns: "string"},
+    horse_level_max: {desc: "work in progress...", args: [], returns: "string"},
+    horse_level_time: {desc: "work in progress...", args: [], returns: "string"},
+    horse_name: {desc: "work in progress...", args: [], returns: "string"},
+    horse_tier: {desc: "work in progress...", args: [], returns: "string"},
+    horse_xp: {desc: "work in progress...", args: [], returns: "string"},
+    id: {desc: "work in progress...", args: [], returns: "string"},
+    in_mapped_area: {desc: "work in progress...", args: [], returns: "string"},
+    in_stream: {desc: "work in progress...", args: [], returns: "string"},
+    ingredient_pouch_open_slots: {desc: "work in progress...", args: [], returns: "string"},
+    ingredient_pouch_used_slots: {desc: "work in progress...", args: [], returns: "string"},
+    initial_tower_attack_speed: {desc: "work in progress...", args: [], returns: "string"},
+    initial_tower_damage: {desc: "work in progress...", args: [], returns: "string"},
+    initial_tower_defense: {desc: "work in progress...", args: [], returns: "string"},
+    initial_tower_health: {desc: "work in progress...", args: [], returns: "string"},
+    inventory_free: {desc: "work in progress...", args: [], returns: "string"},
+    inventory_used: {desc: "work in progress...", args: [], returns: "string"},
+    is_allied_guild: {desc: "work in progress...", args: [], returns: "string"},
+    is_territory_queued: {desc: "work in progress...", args: [], returns: "string"},
+    item_count: {desc: "work in progress...", args: [], returns: "string"},
+    key_pressed: {desc: "work in progress...", args: [], returns: "string"},
+    kills_per_minute: {desc: "work in progress...", args: [], returns: "string"},
+    last_dry_streak: {desc: "work in progress...", args: [], returns: "string"},
+    last_harvest_material_level: {desc: "work in progress...", args: [], returns: "string"},
+    last_harvest_material_name: {desc: "work in progress...", args: [], returns: "string"},
+    last_harvest_material_tier: {desc: "work in progress...", args: [], returns: "string"},
+    last_harvest_material_type: {desc: "work in progress...", args: [], returns: "string"},
+    last_harvest_resource_type: {desc: "work in progress...", args: [], returns: "string"},
+    last_mythic: {desc: "work in progress...", args: [], returns: "string"},
+    last_spell_name: {desc: "work in progress...", args: [], returns: "string"},
+    last_spell_repeat_count: {desc: "work in progress...", args: [], returns: "string"},
+    level: {desc: "work in progress...", args: [], returns: "string"},
+    liquid_emerald: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_beacon_count: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_beacon_vibrant: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_challenges: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_last_selected_beacon_color: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_last_selected_beacon_vibrant: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_mission: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_next_orange_expire: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_orange_beacon_count: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_rainbow_beacon_count: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_red_beacon_challenge_count: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_state: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_task_location: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_task_name: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_task_type: {desc: "work in progress...", args: [], returns: "string"},
+    lootrun_time: {desc: "work in progress...", args: [], returns: "string"},
+    mana: {desc: "work in progress...", args: [], returns: "string"},
+    mana_max: {desc: "work in progress...", args: [], returns: "string"},
+    mana_pct: {desc: "work in progress...", args: [], returns: "string"},
+    mantle_shield_count: {desc: "work in progress...", args: [], returns: "string"},
+    material_dry_streak: {desc: "work in progress...", args: [], returns: "string"},
+    mem_max: {desc: "work in progress...", args: [], returns: "string"},
+    mem_pct: {desc: "work in progress...", args: [], returns: "string"},
+    mem_used: {desc: "work in progress...", args: [], returns: "string"},
+    minecraft_effect_duration: {desc: "work in progress...", args: [], returns: "string"},
+    mob_totem: {desc: "work in progress...", args: [], returns: "string"},
+    mob_totem_count: {desc: "work in progress...", args: [], returns: "string"},
+    mob_totem_distance: {desc: "work in progress...", args: [], returns: "string"},
+    mob_totem_owner: {desc: "work in progress...", args: [], returns: "string"},
+    mob_totem_time_left: {desc: "work in progress...", args: [], returns: "string"},
+    money: {desc: "work in progress...", args: [], returns: "string"},
+    my_location: {desc: "work in progress...", args: [], returns: "string"},
+    newest_world: {desc: "work in progress...", args: [], returns: "string"},
+    objective_streak: {desc: "work in progress...", args: [], returns: "string"},
+    ophanim_active: {desc: "work in progress...", args: [], returns: "string"},
+    ophanim_orb: {desc: "work in progress...", args: [], returns: "string"},
+    party_leader: {desc: "work in progress...", args: [], returns: "string"},
+    party_members: {desc: "work in progress...", args: [], returns: "string"},
+    ping: { desc: "取得延遲", args: [], returns: "number" },
+    profession_level: {desc: "work in progress...", args: [], returns: "string"},
+    profession_percentage: {desc: "work in progress...", args: [], returns: "string"},
+    profession_xp: {desc: "work in progress...", args: [], returns: "string"},
+    profession_xp_per_minute: {desc: "work in progress...", args: [], returns: "string"},
+    profession_xp_per_minute_raw: {desc: "work in progress...", args: [], returns: "string"},
+    raid_challenges: {desc: "work in progress...", args: [], returns: "string"},
+    raid_has_room: {desc: "work in progress...", args: [], returns: "string"},
+    raid_intermission_time: {desc: "work in progress...", args: [], returns: "string"},
+    raid_is_boss_room: {desc: "work in progress...", args: [], returns: "string"},
+    raid_personal_best_time: {desc: "work in progress...", args: [], returns: "string"},
+    raid_room_damage: {desc: "work in progress...", args: [], returns: "string"},
+    raid_room_name: {desc: "work in progress...", args: [], returns: "string"},
+    raid_room_time: {desc: "work in progress...", args: [], returns: "string"},
+    raid_time_remaining: {desc: "work in progress...", args: [], returns: "string"},
+    rainbow_shader: {desc: "work in progress...", args: [], returns: "string"},
+    shaman_mask: {desc: "work in progress...", args: [], returns: "string"},
+    shaman_totem_distance: {desc: "work in progress...", args: [], returns: "string"},
+    shaman_totem_location: {desc: "work in progress...", args: [], returns: "string"},
+    shaman_totem_state: {desc: "work in progress...", args: [], returns: "string"},
+    shaman_totem_time_left: {desc: "work in progress...", args: [], returns: "string"},
+    shield_type_name: {desc: "work in progress...", args: [], returns: "string"},
+    sprint: {desc: "work in progress...", args: [], returns: "string"},
+    statistics_average: {desc: "work in progress...", args: [], returns: "string"},
+    statistics_count: {desc: "work in progress...", args: [], returns: "string"},
+    statistics_first_modified: {desc: "work in progress...", args: [], returns: "string"},
+    statistics_formatted: {desc: "work in progress...", args: [], returns: "string"},
+    statistics_last_modified: {desc: "work in progress...", args: [], returns: "string"},
+    statistics_max: {desc: "work in progress...", args: [], returns: "string"},
+    statistics_min: {desc: "work in progress...", args: [], returns: "string"},
+    statistics_total: {desc: "work in progress...", args: [], returns: "string"},
+    status_effect_active: {desc: "work in progress...", args: [], returns: "string"},
+    status_effects: {desc: "work in progress...", args: [], returns: "string"},
+    stopwatch_hours: {desc: "work in progress...", args: [], returns: "string"},
+    stopwatch_milliseconds: {desc: "work in progress...", args: [], returns: "string"},
+    stopwatch_minutes: {desc: "work in progress...", args: [], returns: "string"},
+    stopwatch_running: {desc: "work in progress...", args: [], returns: "string"},
+    stopwatch_seconds: {desc: "work in progress...", args: [], returns: "string"},
+    stopwatch_zero: {desc: "work in progress...", args: [], returns: "string"},
+    team_dps: {desc: "work in progress...", args: [], returns: "string"},
+    ticks: {desc: "work in progress...", args: [], returns: "string"},
+    ticks_since_last_spell: {desc: "work in progress...", args: [], returns: "string"},
+    time_in_war: {desc: "work in progress...", args: [], returns: "string"},
+    time_since_last_damage_dealt: {desc: "work in progress...", args: [], returns: "string"},
+    time_since_last_kill: {desc: "work in progress...", args: [], returns: "string"},
+    token_gatekeeper: {desc: "work in progress...", args: [], returns: "string"},
+    token_gatekeeper_count: {desc: "work in progress...", args: [], returns: "string"},
+    token_gatekeeper_deposited: {desc: "work in progress...", args: [], returns: "string"},
+    token_gatekeeper_type: {desc: "work in progress...", args: [], returns: "string"},
+    total_area_damage: {desc: "work in progress...", args: [], returns: "string"},
+    tower_dps: {desc: "work in progress...", args: [], returns: "string"},
+    tower_effective_hp: {desc: "work in progress...", args: [], returns: "string"},
+    tower_owner: {desc: "work in progress...", args: [], returns: "string"},
+    tower_territory: {desc: "work in progress...", args: [], returns: "string"},
+    transcribe_gavellian: {desc: "work in progress...", args: [], returns: "string"},
+    transcribe_wynnic: {desc: "work in progress...", args: [], returns: "string"},
+    volley_timer: {desc: "work in progress...", args: [], returns: "string"},
+    wars_since: {desc: "work in progress...", args: [], returns: "string"},
+    world_state: {desc: "work in progress...", args: [], returns: "string"},
+    world_uptime: {desc: "work in progress...", args: [], returns: "string"},
+    xp: {desc: "work in progress...", args: [], returns: "string"},
+    xp_pct: {desc: "work in progress...", args: [], returns: "string"},
+    xp_per_minute: {desc: "work in progress...", args: [], returns: "string"},
+    xp_per_minute_raw: {desc: "work in progress...", args: [], returns: "string"},
+    xp_percentage_per_minute: {desc: "work in progress...", args: [], returns: "string"},
+    xp_raw: {desc: "work in progress...", args: [], returns: "string"},
+    xp_req: {desc: "work in progress...", args: [], returns: "string"},
+    xp_req_raw: {desc: "work in progress...", args: [], returns: "string"},
+    add: {desc: "work in progress...", args: [], returns: "string"},
+    and: {desc: "work in progress...", args: [], returns: "string"},
+    at_cap: {desc: "work in progress...", args: [], returns: "string"},
+    brightness_shift: {desc: "work in progress...", args: [], returns: "string"},
+    cap: {desc: "work in progress...", args: [], returns: "string"},
+    capped: {desc: "work in progress...", args: [], returns: "string"},
+    capped_string: {desc: "work in progress...", args: [], returns: "string"},
+    concat: { desc: "多個字串合併", args: [{ type: "any[]" }], returns: "string" },
+    current: {desc: "work in progress...", args: [], returns: "string"},
+    distance: {desc: "work in progress...", args: [], returns: "string"},
+    divide: {desc: "work in progress...", args: [], returns: "string"},
+    equals: {desc: "work in progress...", args: [], returns: "string"},
+    format: {desc: "work in progress...", args: [], returns: "string"},
+    format_capped: {desc: "work in progress...", args: [], returns: "string"},
+    format_date: {desc: "work in progress...", args: [], returns: "string"},
+    format_duration: {desc: "work in progress...", args: [], returns: "string"},
+    format_ranged: {desc: "work in progress...", args: [], returns: "string"},
+    from_hex: {desc: "work in progress...", args: [], returns: "string"},
+    from_rgb: {desc: "work in progress...", args: [], returns: "string"},
+    from_rgb_percent: {desc: "work in progress...", args: [], returns: "string"},
+    greater_than: {desc: "work in progress...", args: [], returns: "string"},
+    greater_than_or_equals: {desc: "work in progress...", args: [], returns: "string"},
+    hue_shift: {desc: "work in progress...", args: [], returns: "string"},
+    if_capped_value: {desc: "work in progress...", args: [], returns: "string"},
+    if_custom_color: {desc: "work in progress...", args: [], returns: "string"},
+    if_number: {desc: "work in progress...", args: [], returns: "string"},
+    if_string: { desc: "設定條件，顯示不同字串", args: [{ type: "boolean" }, { type: "string" }, { type: "string" }], returns: "string" },
+    integer: {desc: "轉換成整數", args: [], returns: "number"},
+    leading_zeros: {desc: "work in progress...", args: [], returns: "string"},
+    less_than: {desc: "work in progress...", args: [], returns: "string"},
+    less_than_or_equals: {desc: "work in progress...", args: [], returns: "string"},
+    location: {desc: "work in progress...", args: [], returns: "string"},
+    long: {desc: "work in progress...", args: [], returns: "string"},
+    max: {desc: "work in progress...", args: [], returns: "string"},
+    min: {desc: "work in progress...", args: [], returns: "string"},
+    modulo: {desc: "work in progress...", args: [], returns: "string"},
+    multiply: {desc: "work in progress...", args: [], returns: "string"},
+    name: {desc: "work in progress...", args: [], returns: "string"},
+    named_value: {desc: "work in progress...", args: [], returns: "string"},
+    not: {desc: "work in progress...", args: [], returns: "string"},
+    not_equals: {desc: "work in progress...", args: [], returns: "string"},
+    or: {desc: "work in progress...", args: [], returns: "string"},
+    parse_double: {desc: "work in progress...", args: [], returns: "string"},
+    parse_integer: {desc: "work in progress...", args: [], returns: "string"},
+    percentage: {desc: "work in progress...", args: [], returns: "string"},
+    power: {desc: "work in progress...", args: [], returns: "string"},
+    random: {desc: "work in progress...", args: [], returns: "string"},
+    range_high: {desc: "work in progress...", args: [], returns: "string"},
+    range_low: {desc: "work in progress...", args: [], returns: "string"},
+    ranged: {desc: "work in progress...", args: [], returns: "string"},
+    regex_find: {desc: "work in progress...", args: [], returns: "string"},
+    regex_match: {desc: "work in progress...", args: [], returns: "string"},
+    regex_replace: {desc: "work in progress...", args: [], returns: "string"},
+    remaining: {desc: "work in progress...", args: [], returns: "string"},
+    repeat: {desc: "work in progress...", args: [], returns: "string"},
+    round: {desc: "work in progress...", args: [], returns: "string"},
+    saturation_shift: {desc: "work in progress...", args: [], returns: "string"},
+    square_root: {desc: "work in progress...", args: [], returns: "string"},
+    string: { desc: "將整數轉換成字串", args: [{ type: ["number", "component"] }], returns: "string" },
+    string_contains: {desc: "work in progress...", args: [], returns: "string"},
+    string_equals: {desc: "work in progress...", args: [], returns: "string"},
+    subtract: {desc: "work in progress...", args: [], returns: "string"},
+    to_hex_string: {desc: "work in progress...", args: [], returns: "string"},
+    value: {desc: "work in progress...", args: [], returns: "string"},
+    x: {desc: "work in progress...", args: [], returns: "string"},
+    y: {desc: "work in progress...", args: [], returns: "string"},
+    z: {desc: "work in progress...", args: [], returns: "string"}
 };
 
 function genId() {
@@ -74,12 +329,12 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
   const input = document.createElement("input");
   input.type = "text";
   input.value = value;
-  input.placeholder = "Function ";
+  input.placeholder = "Function Name";
   input.className = "w-full border rounded-xl bg-[#23272f] text-white px-3 py-1 shadow focus:outline-none focus:ring-2 focus:ring-[#5865f2] transition";
   input.title = tooltip;
 
   const datalist = document.createElement("ul");
-  datalist.className = "suggestion-list absolute top-full w-full z-10 bg-[#181c23] border text-sm max-h-40 overflow-y-auto hidden";
+  datalist.className = "suggestion-list absolute top-full w-full z-10 bg-[#181c23] border text-sm max-h-80 overflow-y-auto hidden";
 
   input.oninput = (e) => {
     const val = e.target.value;
@@ -90,7 +345,7 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
     if (hits.length === 0) return datalist.classList.add("hidden");
     hits.forEach(s => {
       const option = document.createElement("div");
-      option.className = "p-4 bg-[#2d3340] rounded-xl shadow flex flex-col cursor-pointer";
+      option.className = "bg-opacity-50 hover:bg-opacity-100 p-4 bg-[#2d3340] rounded-xl shadow flex flex-col cursor-pointer transition-all";
       option.onclick = () => {
         input.value = s;
         input.title = COMPONENTS[s]?.desc || "";
@@ -122,7 +377,7 @@ function createTextForm(node) {
 
   const dragHandle = document.createElement("span");
   dragHandle.className = "cursor-move select-none px-2 text-gray-400";
-  dragHandle.title = "拖曳排序";
+  dragHandle.title = "Drag";
   dragHandle.innerHTML = "&#9776;";
   dragHandle.draggable = true;
   dragHandle.dataset.id = node.id;
@@ -134,7 +389,7 @@ function createTextForm(node) {
 
   const input = document.createElement("input");
   input.type = "text";
-  input.placeholder = "輸入文字";
+  input.placeholder = "Enter String";
   input.className = "w-full border rounded-xl bg-[#23272f] text-white px-3 py-1 shadow focus:outline-none focus:ring-2 focus:ring-[#5865f2] transition";
   input.value = node.value;
   input.addEventListener('mousedown', e => e.stopPropagation());
@@ -148,8 +403,8 @@ function createTextForm(node) {
   inputWrapper.appendChild(input);
 
   const del = document.createElement("button");
-  del.textContent = "刪除";
-  del.className = "px-3 py-1 bg-[#f74040] hover:bg-[#dc2626] text-white rounded-xl shadow transition";
+  del.textContent = "Delete";
+  del.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#f74040] text-white rounded-xl shadow transition";
   del.onclick = () => {
     const p = findParent(node.id);
     p.list.splice(p.index, 1);
@@ -157,8 +412,8 @@ function createTextForm(node) {
   };
 
   const dup = document.createElement("button");
-  dup.textContent = "複製";
-  dup.className = "px-3 py-1 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition";
+  dup.textContent = "Copy";
+  dup.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#5865f2] text-white rounded-xl shadow transition";
   dup.onclick = () => {
     const p = findParent(node.id);
     const copy = cloneNode(node);
@@ -172,7 +427,7 @@ function createTextForm(node) {
 
 function createCompForm(node) {
   const box = document.createElement("div");
-  box.className = "flex flex-col gap-1 py-1 flex-grow w-full min-w-0";
+  box.className = "flex flex-col py-1 flex-grow w-full min-w-0";
   box.dataset.id = node.id;
 
   // 主行
@@ -181,15 +436,15 @@ function createCompForm(node) {
 
   const dragHandle = document.createElement("span");
   dragHandle.className = "cursor-move select-none px-2 text-gray-400";
-  dragHandle.title = "拖曳排序";
+  dragHandle.title = "Drag";
   dragHandle.innerHTML = "&#9776;";
   dragHandle.draggable = true;
   dragHandle.dataset.id = node.id;
   addDragHandlers(dragHandle);
 
   const del = document.createElement("button");
-  del.textContent = "刪除";
-  del.className = "px-3 py-1 bg-[#f74040] hover:bg-[#dc2626] text-white rounded-xl shadow transition";
+  del.textContent = "Delete";
+  del.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#f74040] text-white rounded-xl shadow transition";
   del.onclick = () => {
     const p = findParent(node.id);
     p.list.splice(p.index, 1);
@@ -197,8 +452,8 @@ function createCompForm(node) {
   };
 
   const dup = document.createElement("button");
-  dup.textContent = "複製";
-  dup.className = "px-3 py-1 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition";
+  dup.textContent = "Copy";
+  dup.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#5865f2] text-white rounded-xl shadow transition";
   dup.onclick = () => {
     const p = findParent(node.id);
     const copy = cloneNode(node);
@@ -231,16 +486,16 @@ function createCompForm(node) {
 
   if (node.name === "concat") {
     const btnTxt = document.createElement("button");
-    btnTxt.textContent = "＋文字參數";
-    btnTxt.className = "px-3 py-1 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition";
+    btnTxt.textContent = "+ String";
+    btnTxt.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition";
     btnTxt.onclick = () => {
       node.args.push({ id: genId(), type: "text", value: "" });
       renderAll();
     };
 
     const btnComp = document.createElement("button");
-    btnComp.textContent = "＋子組件";
-    btnComp.className = "px-3 py-1 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition";
+    btnComp.textContent = "+ Function";
+    btnComp.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition";
     btnComp.onclick = () => {
       node.args.push({ id: genId(), type: "component", name: "", args: [] });
       renderAll();
@@ -257,7 +512,7 @@ function createCompForm(node) {
     let argType = "string";
     if (meta && meta.args && meta.args[idx]) {
       argType = meta.args[idx].type;
-      typeHint = Array.isArray(argType) ? argType.join(" 或 ") : argType;
+      typeHint = Array.isArray(argType) ? argType.join(" or ") : argType;
     }
     if (Array.isArray(argType)) {
       const select = document.createElement("select");
@@ -265,7 +520,7 @@ function createCompForm(node) {
       ["string", "component"].forEach(optType => {
         const opt = document.createElement("option");
         opt.value = optType;
-        opt.textContent = optType === "string" ? "文字" : "子組件";
+        opt.textContent = optType === "string" ? "String" : "Function";
         select.appendChild(opt);
       });
       select.value = child.type === "component" ? "component" : "string";
@@ -278,7 +533,7 @@ function createCompForm(node) {
         renderAll();
       };
       const form = child.type === "text" ? createTextForm(child) : createCompForm(child);
-      form.title = "參數型別：" + typeHint;
+      form.title = "Type: " + typeHint;
       const dragHandle = form.querySelector('.cursor-move');
       if (dragHandle) dragHandle.insertAdjacentElement('afterend', select);
       const row = document.createElement("div");
@@ -288,7 +543,7 @@ function createCompForm(node) {
       argList.appendChild(row);
     } else {
       const form = child.type === "text" ? createTextForm(child) : createCompForm(child);
-      if (typeHint) form.title = "參數型別：" + typeHint;
+      if (typeHint) form.title = "Type: " + typeHint;
       argList.appendChild(form);
     }
   });
@@ -423,7 +678,7 @@ window.onload = () => {
       navigator.clipboard.writeText(text).then(() => {
         // 顯示提示
         const tip = document.createElement('div');
-        tip.textContent = '已複製到剪貼簿！';
+        tip.textContent = 'copied to clipboard!';
         tip.className = 'fixed bottom-8 right-8 bg-[#43b581] text-white px-4 py-2 rounded-xl shadow-lg z-[9999] animate-fade-in';
         document.body.appendChild(tip);
         setTimeout(() => {

@@ -9,45 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
+    body { font-family: 'Inter', sans-serif; }
+    li.drop-before { border-top: 2px solid #43b581 !important; }
+    li.drop-after { border-bottom: 2px solid #43b581 !important; }
 
-    li.drop-before {
-      border-top: 2px solid #43b581 !important;
-    }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    .animate-fade-in { animation: fade-in 0.2s; }
 
-    li.drop-after {
-      border-bottom: 2px solid #43b581 !important;
-    }
-
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    .animate-fade-in {
-      animation: fade-in 0.2s;
-    }
-
-    @keyframes fade-out {
-      from {
-        opacity: 1;
-      }
-
-      to {
-        opacity: 0;
-      }
-    }
-
-    .animate-fade-out {
-      animation: fade-out 0.3s;
-    }
+    @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+    .animate-fade-out { animation: fade-out 0.4s; }
   </style>
 </head>
 
@@ -57,9 +27,9 @@
     <h2 class="text-2xl font-semibold mb-2">Add Node</h2>
     <div class="space-x-3">
       <button id="addText"
-        class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#5865f2] hover:bg-[#4752c4] text-white rounded-xl shadow transition-all">Text</button>
+        class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#5865f2] text-white rounded-xl shadow transition">String</button>
       <button id="addComp"
-        class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition-all">Function</button>
+        class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#5865f2] text-white rounded-xl shadow transition">Function</button>
     </div>
     <h2 class="text-2xl font-semibold mt-8 mb-2">Node List</h2>
     <ul id="nodeList" class="overflow-auto flex-grow"></ul>
@@ -74,7 +44,7 @@
     <div class="p-4 border-b border-[#2d3340] font-bold text-lg flex items-center justify-between">
       <span>Result</span>
       <button id="copy-preview"
-        class="ml-2 px-3 py-1 bg-[#43b581] hover:bg-[#38996b] text-white rounded-xl shadow transition text-base">Copy</button>
+        class="bg-opacity-50 hover:bg-opacity-100 ml-2 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition text-base">Copy</button>
     </div>
     <pre id="preview" class="p-4 overflow-auto"
       style="min-height: 50vh; max-height: 50vh; white-space: pre-wrap;"></pre>
