@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wynntils Generator</title>
+  <title>Wynntils Function Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -21,17 +21,21 @@
   </style>
 </head>
 
-<body class="flex h-screen bg-[#181c23] text-white relative max-md:text-sm">
+<body class="flex flex-col h-screen bg-[#181c23] text-white relative max-md:text-sm">
+  <header class="flex items-center justify-between px-6 py-4 font-semibold">
+    <h1 class="text-3xl">Wynntils Function Generator</h1>
+    <p class="text-sm">Made by <span class="text-orange-400">FocalSalt</span></p>
+  </header>
   <main
-    class="bg-[#23272f] p-6 overflow-y-auto border-r border-[#2d3340] space-y-6 shadow-lg rounded-r-3xl flex flex-grow flex-col">
-    <h2 class="text-2xl font-semibold mb-2">Add Node</h2>
+    class="bg-[#23272f] p-6 overflow-y-auto space-y-6 shadow-lg flex flex-grow flex-col">
+    <h2 class="text-2xl font-semibold">Add Node</h2>
     <div class="space-x-3">
       <button id="addText"
         class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#5865f2] text-white rounded-xl shadow transition">String</button>
       <button id="addComp"
         class="bg-opacity-50 hover:bg-opacity-100 px-4 py-2 bg-[#5865f2] text-white rounded-xl shadow transition">Function</button>
     </div>
-    <h2 class="text-2xl font-semibold mt-8 mb-2">Node List</h2>
+    <h2 class="text-2xl font-semibold mt-8">Node List</h2>
     <ul id="nodeList" class="overflow-auto flex-grow"></ul>
   </main>
   <div id="preview-float"
