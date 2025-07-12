@@ -345,7 +345,7 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
     if (hits.length === 0) return datalist.classList.add("hidden");
     hits.forEach(s => {
       const option = document.createElement("div");
-      option.className = "bg-opacity-50 hover:bg-opacity-100 p-4 bg-[#2d3340] rounded-xl shadow flex flex-col cursor-pointer transition-all";
+      option.className = "bg-opacity-100 hover:bg-opacity-50 p-4 bg-[#2d3340] rounded-xl shadow flex flex-col cursor-pointer transition-all";
       option.onclick = () => {
         input.value = s;
         input.title = COMPONENTS[s]?.desc || "";
@@ -404,7 +404,7 @@ function createTextForm(node) {
 
   const del = document.createElement("button");
   del.textContent = "Delete";
-  del.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#f74040] text-white rounded-xl shadow transition";
+  del.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#f74040] text-white rounded-xl shadow transition";
   del.onclick = () => {
     const p = findParent(node.id);
     p.list.splice(p.index, 1);
@@ -413,7 +413,7 @@ function createTextForm(node) {
 
   const dup = document.createElement("button");
   dup.textContent = "Copy";
-  dup.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#5865f2] text-white rounded-xl shadow transition";
+  dup.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#5865f2] text-white rounded-xl shadow transition";
   dup.onclick = () => {
     const p = findParent(node.id);
     const copy = cloneNode(node);
@@ -444,7 +444,7 @@ function createCompForm(node) {
 
   const del = document.createElement("button");
   del.textContent = "Delete";
-  del.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#f74040] text-white rounded-xl shadow transition";
+  del.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#f74040] text-white rounded-xl shadow transition";
   del.onclick = () => {
     const p = findParent(node.id);
     p.list.splice(p.index, 1);
@@ -453,7 +453,7 @@ function createCompForm(node) {
 
   const dup = document.createElement("button");
   dup.textContent = "Copy";
-  dup.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#5865f2] text-white rounded-xl shadow transition";
+  dup.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#5865f2] text-white rounded-xl shadow transition";
   dup.onclick = () => {
     const p = findParent(node.id);
     const copy = cloneNode(node);
@@ -487,7 +487,7 @@ function createCompForm(node) {
   if (node.name === "concat") {
     const btnTxt = document.createElement("button");
     btnTxt.textContent = "+ String";
-    btnTxt.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition";
+    btnTxt.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition";
     btnTxt.onclick = () => {
       node.args.push({ id: genId(), type: "text", value: "" });
       renderAll();
@@ -495,7 +495,7 @@ function createCompForm(node) {
 
     const btnComp = document.createElement("button");
     btnComp.textContent = "+ Function";
-    btnComp.className = "bg-opacity-50 hover:bg-opacity-100 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition";
+    btnComp.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition";
     btnComp.onclick = () => {
       node.args.push({ id: genId(), type: "component", name: "", args: [] });
       renderAll();
