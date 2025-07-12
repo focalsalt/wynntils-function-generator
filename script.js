@@ -74,7 +74,7 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
   const input = document.createElement("input");
   input.type = "text";
   input.value = value;
-  input.placeholder = "組件名稱";
+  input.placeholder = "Function ";
   input.className = "w-full border rounded-xl bg-[#23272f] text-white px-3 py-1 shadow focus:outline-none focus:ring-2 focus:ring-[#5865f2] transition";
   input.title = tooltip;
 
