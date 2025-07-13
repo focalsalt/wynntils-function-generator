@@ -1,4 +1,2 @@
 .idea
-function_list1.bak
-function_list2.bak
-function_list3.bak
+*.bak
