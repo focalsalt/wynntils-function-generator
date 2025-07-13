@@ -3,7 +3,7 @@ import { FUNCTIONS } from "./define.js";
 let tree = [];
 let counter = 0;
 
-// 
+// Generate a unique ID for each node
 function generateId() {
   return `node-${counter++}`;
 }
@@ -67,12 +67,12 @@ function createAutoSuggestInput(value, onInput, tooltip = '') {
   return inputWrapper;
 }
 
+// Create a form for string nodes
 function createStringForm(node) {
   const row = document.createElement("div");
   row.className = "flex items-center gap-2 py-1 w-full flex-nowrap min-w-0";
   row.dataset.id = node.id;
 
-  // Create drag handle
   const dragHandle = document.createElement("span");
   dragHandle.className = "cursor-move select-none px-2 text-gray-400";
   dragHandle.title = "Drag to Move";
@@ -81,7 +81,6 @@ function createStringForm(node) {
   dragHandle.dataset.id = node.id;
   addDragHandlers(dragHandle);
 
-  // Create delete button
   const deleteButton = document.createElement("button");
   deleteButton.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#f74040] text-white rounded-xl shadow transition";
   deleteButton.textContent = "Delete";
@@ -91,7 +90,6 @@ function createStringForm(node) {
     renderAll();
   };
 
-  // Create duplicate button
   const duplicateButton = document.createElement("button");
   duplicateButton.textContent = "Copy";
   duplicateButton.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#5865f2] text-white rounded-xl shadow transition";
@@ -102,7 +100,6 @@ function createStringForm(node) {
     renderAll();
   };
 
-  // Create input field
   const inputWrapper = document.createElement("div");
   inputWrapper.className = "flex-1 max-w-[420px]";
   const input = document.createElement("input");
@@ -116,11 +113,11 @@ function createStringForm(node) {
   input.addEventListener('blur', () => renderAll());
   inputWrapper.appendChild(input);
 
-  // Append elements to the row
   row.append(dragHandle, deleteButton, duplicateButton, inputWrapper);
   return row;
 }
 
+// Create a form for function nodes
 function createFunctionForm(node) {
   const box = document.createElement("div");
   box.className = "flex flex-col py-1 flex-grow w-full min-w-0";
@@ -137,7 +134,6 @@ function createFunctionForm(node) {
   dragHandle.dataset.id = node.id;
   addDragHandlers(dragHandle);
 
-  // Create delete button
   const deleteButton = document.createElement("button");
   deleteButton.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#f74040] text-white rounded-xl shadow transition";
   deleteButton.textContent = "Delete";
@@ -147,7 +143,6 @@ function createFunctionForm(node) {
     renderAll();
   };
 
-  // Create duplicate button
   const duplicateButton = document.createElement("button");
   duplicateButton.textContent = "Copy";
   duplicateButton.className = "bg-opacity-100 hover:bg-opacity-50 px-3 py-1 bg-[#5865f2] text-white rounded-xl shadow transition";
@@ -158,7 +153,6 @@ function createFunctionForm(node) {
     renderAll();
   };
 
-  // Create input field
   const tooltip = FUNCTIONS[node.name]?.desc || '';
   const inputWrapper = createAutoSuggestInput(node.name, (value, isSelect) => {
     node.name = value;
@@ -258,6 +252,7 @@ function createFunctionForm(node) {
   return box;
 }
 
+// Add drag and drop functionality to elements
 let dragSource = null;
 function addDragHandlers(element) {
   element.addEventListener('dragstart', e => {
@@ -319,12 +314,14 @@ function addDragHandlers(element) {
   });
 }
 
+// Clone a node for duplication
 function cloneNode(node) {
   const id = generateId();
   if (node.type === "string") return { id, type: "string", value: node.value };
   return { id, type: "function", name: node.name, args: node.args.map(cloneNode), };
 }
 
+// Find the parent of a node by its ID
 function findParent(id, list = tree) {
   for (let i = 0; i < list.length; i++) {
     const node = list[i];
@@ -347,6 +344,7 @@ function addFunctionNode() {
   renderAll();
 }
 
+// Render a node to its string representation
 function renderNode(node, isRoot = true, parentFunction = null, argIndex = null) {
   if (node.type === "string") {
     let type = "string";
@@ -375,27 +373,65 @@ function renderAll() {
   ul.innerHTML = '';
   tree.forEach((node, i) => {
     const element = node.type === 'string' ? createStringForm(node) : createFunctionForm(node);
-    // 設定主節點背景色
     element.style.background = (i % 2 === 0) ? "#282d36" : "#20232a";
     ul.appendChild(element);
   });
   document.getElementById('preview').textContent = tree.map(n => renderNode(n)).join('');
 }
 
+function saveTreeToUrl() {
+  const json = JSON.stringify(tree);
+  const compressed = LZString.compressToEncodedURIComponent(json);
+  const url = `${location.origin}${location.pathname}?data=${compressed}`;
+  window.history.replaceState(null, '', url);
+  return url;
+}
+
+function loadTreeFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const data = params.get("data");
+  if (data) {
+    try {
+      const json = LZString.decompressFromEncodedURIComponent(data);
+      tree = JSON.parse(json);
+    } catch (err) {
+      console.error("Failed to load tree from URL:", err);
+    }
+  }
+}
+
 window.onload = () => {
   document.getElementById('addString').onclick = addStringNode;
   document.getElementById('addFunction').onclick = addFunctionNode;
+
+  loadTreeFromUrl();
   renderAll();
 
-  // 複製預覽內容並顯示提示
   const copyButton = document.getElementById('copy-preview');
   if (copyButton) {
     copyButton.onclick = () => {
       const text = document.getElementById('preview').textContent;
       navigator.clipboard.writeText(text).then(() => {
-        // 顯示提示
         const tip = document.createElement('div');
-        tip.textContent = 'copied to clipboard!';
+        tip.textContent = 'Copied to clipboard!';
+        tip.className = 'fixed bottom-8 right-8 bg-[#43b581] text-white px-4 py-2 rounded-xl shadow-lg z-[9999] animate-fade-in';
+        document.body.appendChild(tip);
+        setTimeout(() => {
+          tip.classList.remove('animate-fade-in');
+          tip.classList.add('animate-fade-out');
+          setTimeout(() => tip.remove(), 300);
+        }, 1200);
+      });
+    };
+  }
+
+  const linkBtn = document.getElementById('generate-link');
+  if (linkBtn) {
+    linkBtn.onclick = () => {
+      const url = saveTreeToUrl();
+      navigator.clipboard.writeText(url).then(() => {
+        const tip = document.createElement('div');
+        tip.textContent = 'Share link copied to clipboard!';
         tip.className = 'fixed bottom-8 right-8 bg-[#43b581] text-white px-4 py-2 rounded-xl shadow-lg z-[9999] animate-fade-in';
         document.body.appendChild(tip);
         setTimeout(() => {

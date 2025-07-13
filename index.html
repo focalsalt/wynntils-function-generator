@@ -8,6 +8,7 @@
   <title>Wynntils Function Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
   <style>
     body { font-family: 'Inter', sans-serif; }
     .drop-before {
@@ -53,8 +54,10 @@
     </div>
     <div class="p-4 border-b border-[#2d3340] font-bold text-lg flex items-center justify-between">
       <span>Result</span>
-      <button id="copy-preview"
-        class="bg-opacity-100 hover:bg-opacity-50 ml-2 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition text-base">Copy</button>
+      <div>
+        <button id="copy-preview" class="bg-opacity-100 hover:bg-opacity-50 ml-2 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition text-base">Copy</button>
+        <button id="generate-link" class="bg-opacity-100 hover:bg-opacity-50 ml-2 px-3 py-1 bg-[#43b581] text-white rounded-xl shadow transition text-base">產生分享連結</button>
+      </div>
     </div>
     <pre id="preview" class="p-4 overflow-auto"
       style="min-height: 50vh; max-height: 50vh; white-space: pre-wrap;"></pre>
