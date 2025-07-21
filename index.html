@@ -1,6 +1,6 @@
 <!-- index.html -->
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -33,16 +33,15 @@
     <h1 class="text-3xl">Wynntils Function Generator</h1>
     <p class="text-sm">Made by <span class="text-orange-400">FocalSalt</span></p>
   </header>
-  <main
-    class="bg-[#23272f] p-6 overflow-y-auto space-y-6 shadow-lg flex flex-grow flex-col">
-    <h2 class="text-2xl font-semibold">Add Node</h2>
-    <div class="space-x-3">
-      <button id="addString"
-        class="bg-opacity-100 hover:bg-opacity-50 px-4 py-2 bg-[#5865f2] text-white rounded-xl shadow transition">String</button>
-      <button id="addFunction"
-        class="bg-opacity-100 hover:bg-opacity-50 px-4 py-2 bg-[#5865f2] text-white rounded-xl shadow transition">Function</button>
+  <main class="bg-[#23272f] p-6 space-y-6 shadow-lg flex flex-grow flex-col">
+    <div class="flex items-center space-x-3">
+        <span class="text-2xl font-semibold">Add Root Node</span>
+        <button id="addString" class="bg-opacity-100 hover:bg-opacity-50 px-4 py-2 bg-[#5865f2] text-white rounded-xl shadow transition">String</button>
+        <button id="addFunction" class="bg-opacity-100 hover:bg-opacity-50 px-4 py-2 bg-[#5865f2] text-white rounded-xl shadow transition">Function</button>
     </div>
-    <h2 class="text-2xl font-semibold mt-8">Node List</h2>
+    <div class="flex items-center space-x-3">
+        <span class="text-2xl font-semibold">Node List</span>
+    </div>
     <ul id="nodeList" class="overflow-auto flex-grow"></ul>
   </main>
   <div id="preview-float"
@@ -62,7 +61,7 @@
     <pre id="preview" class="p-4 overflow-auto"
       style="min-height: 50vh; max-height: 50vh; white-space: pre-wrap;"></pre>
   </div>
-  <script type="module" src="script.js"></script>
+  <script type="module" src="data/js/main.js"></script>
 </body>
 
 </html>
